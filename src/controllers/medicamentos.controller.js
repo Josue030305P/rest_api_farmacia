@@ -75,7 +75,17 @@ export const createMedicamento = async (req, res) => {
     try {
         const {tipo, nombre,nomcomercial,presentacion, receta, precio} = req.body;
         const querySQL = 'INSERT INTO medicamentos (tipo,nombre,nomcomercial,presentacion, receta,precio) VALUES (?, ?, ?, ?, ?, ?)';
-        const [result] = await pool.query(querySQL, [tipo,nombre, nomcomercial,presentacion,receta,precio]);
+        
+        const nombreComercialValidado = nomcomercial  === '' ? null : nomcomercial; 
+        if (precio <=0){
+            return res.status(400).json({message: 'El precio no puede ser menor o igual a 0'});
+        }
+
+        
+        
+
+
+        const [result] = await pool.query(querySQL, [tipo,nombre, nombreComercialValidado,presentacion,receta,precio]);
     
         if (result.affectedRows === 0) { 
             return res.status(404).json({message: 'No se pudo crear el medicamento'});
