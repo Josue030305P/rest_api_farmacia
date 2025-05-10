@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { getAllMedicamentos, getMedicamentoById, getMedicamentoByReceta, getMedicamentoByTipo, createMedicamento } from '../controllers/medicamentos.controller.js'
+import { getAllMedicamentos, getMedicamentoById, getMedicamentoByReceta, getMedicamentoByTipo, createMedicamento, updateMedicamento, deleteMedicamento } from '../controllers/medicamentos.controller.js'
 
 const router = Router();
 
@@ -14,6 +14,13 @@ router.get('/medicamentos/tipo/:tipo', getMedicamentoByTipo);
 // METODOS POST:
 
 router.post('/medicamentos', createMedicamento);
+
+//METODO PUT
+
+router.put('/medicamentos/:id',updateMedicamento);
+
+// METODO DELETE
+router.delete('/medicamento/:id',deleteMedicamento );
 
 
 
